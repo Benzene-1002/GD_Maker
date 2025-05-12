@@ -125,7 +125,8 @@
         // 2. 結果が存在するかどうか
         if (data && (data.result || data.名前)) {
           card.textContent = data.result || `🎉 あたり！ ${data.名前}`;
-        } else {
+        } 
+        else {
           card.textContent = "該当データが見つかりませんでした…";
         }
 
