@@ -112,27 +112,22 @@
     async function spinGacha() {
       const category = document.getElementById("category").value;
       const level = document.getElementById("level").value;
-
       const card = document.getElementById("card");
 
-      // 1. APIにアクセス（Apps Script URLを自分のに差し替える）
-      const url = `https://script.google.com/macros/s/AKfycbyA47E7oh9XYLwkuCx0IZg7FZp1v9nzGgZn__7EqAXOv3Yw4cf8XqJHYHzxgrIJx71w/exec`;
-      
+      const url = `https://script.google.com/macros/s/AKfycbyA47E7oh9XYLwkuCx0IZg7FZp1v9nzGgZn__7EqAXOv3Yw4cf8XqJHYHzxgrIJx71w/exec?category=${encodeURIComponent(category)}&level=${encodeURIComponent(level)}`;
+
       try {
         const res = await fetch(url);
         const data = await res.json();
 
-        // 2. 結果が存在するかどうか
-        if (data && (data.result || data.名前)) {
-          card.textContent = data.result || `🎉 あたり！ ${data.名前}`;
-        } 
-        else {
+        if (data && data.name) {
+          card.textContent = `🎉 あたり！ ${data.name}`;
+        } else {
           card.textContent = "該当データが見つかりませんでした…";
         }
 
-        // 3. アニメーション再実行
         card.classList.remove("show");
-        void card.offsetWidth; // 再描画を強制
+        void card.offsetWidth;
         card.classList.add("show");
 
       } catch (e) {
