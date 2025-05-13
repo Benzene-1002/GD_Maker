@@ -121,7 +121,7 @@
         const data = await res.json();
 
         if (data && data.name) {
-          card.textContent = `🎉 あたり！ ${data.name}`;
+          card.textContent = `🎯 ${data.name}（${data.category}・${data.level}）`;
         } else {
           card.textContent = "該当データが見つかりませんでした…";
         }
